@@ -1,0 +1,1 @@
+# escuta multicast, assume failover
