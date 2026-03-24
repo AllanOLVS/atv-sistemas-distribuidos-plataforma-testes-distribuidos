@@ -140,13 +140,13 @@ class HeartbeatMonitor:
  
                 # Registra worker automaticamente se for novo
                 if not self.state.get_worker(worker_id):
-                    host, port = addr
-                    # Porta real do worker = porta de HB - 100
-                    worker_port = msg.get("worker_port", port)
-                    self.state.add_worker(worker_id, host, worker_port)
+                    # Prefere host informado pelo worker; fallback = IP da conexão
+                    worker_host = msg.get("worker_host", addr[0])
+                    worker_port = msg.get("worker_port", addr[1])
+                    self.state.add_worker(worker_id, worker_host, worker_port)
                     self.logger.info(
                         f"Novo worker registrado: {worker_id} "
-                        f"em {host}:{worker_port}"
+                        f"em {worker_host}:{worker_port}"
                     )
  
                 self.state.update_heartbeat(worker_id, active_tasks)

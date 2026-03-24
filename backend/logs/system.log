@@ -1,0 +1,388 @@
+# gerado em runtime2026-03-23 13:03:50 | L:0   | ORCHESTRATOR   | INFO  | HeartbeatMonitor escutando em 127.0.0.1:5100
+2026-03-23 13:03:50 | L:0   | ORCHESTRATOR   | INFO  | Scheduler Round Robin iniciado
+2026-03-23 13:03:50 | L:1   | ORCHESTRATOR   | INFO  | MulticastSender iniciado → 224.1.1.1:7000 (intervalo=2.0s)
+2026-03-23 13:03:50 | L:1   | ORCHESTRATOR   | INFO  | Orquestrador Principal iniciado em 127.0.0.1:5000
+2026-03-23 13:03:50 | L:1   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=1 tasks=0 workers=0
+2026-03-23 13:03:52 | L:1   | ORCHESTRATOR   | INFO  | Encerrando orquestrador...
+2026-03-23 13:03:52 | L:2   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=2 tasks=0 workers=0
+2026-03-24 10:02:36 | L:1   | W1             | INFO  | Worker w1 iniciado em 127.0.0.1:6000
+2026-03-24 10:02:36 | L:0   | ORCHESTRATOR   | INFO  | HeartbeatMonitor escutando em 127.0.0.1:5100
+2026-03-24 10:02:36 | L:2   | ORCHESTRATOR   | INFO  | Novo worker registrado: w1 em 127.0.0.1:6000
+2026-03-24 10:02:36 | L:2   | ORCHESTRATOR   | INFO  | Scheduler Round Robin iniciado
+2026-03-24 10:02:36 | L:2   | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=2
+2026-03-24 10:02:36 | L:4   | ORCHESTRATOR   | INFO  | MulticastSender iniciado → 224.1.1.1:7000 (intervalo=2.0s)
+2026-03-24 10:02:36 | L:4   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=4 tasks=0 workers=1
+2026-03-24 10:02:36 | L:4   | ORCHESTRATOR   | INFO  | Orquestrador Principal iniciado em 127.0.0.1:5000
+2026-03-24 10:02:36 | L:0   | BACKUP         | INFO  | MulticastReceiver escutando em 224.1.1.1:7000
+2026-03-24 10:02:36 | L:0   | BACKUP         | INFO  | SyncMonitor iniciado (timeout=18s)
+2026-03-24 10:02:36 | L:0   | BACKUP         | INFO  | Backup Orchestrator em standby. Escutando multicast para sincronização...
+2026-03-24 10:02:38 | L:0   | CLIENT         | INFO  | Conectado ao orquestrador em 127.0.0.1:5000
+2026-03-24 10:02:38 | L:4   | ORCHESTRATOR   | DEBUG | Nova conexão de 127.0.0.1:54968
+2026-03-24 10:02:38 | L:7   | ORCHESTRATOR   | INFO  | [LOGIN_OK] user=alice token=tok_3852f47d… lamport=6
+2026-03-24 10:02:38 | L:9   | ORCHESTRATOR   | INFO  | [TASK_SUBMITTED] task=T-TEST client=alice lamport=9
+2026-03-24 10:02:38 | L:10  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=10 tasks=1 workers=1
+2026-03-24 10:02:38 | L:11  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=11 tasks=1 workers=1
+2026-03-24 10:06:05 | L:0   | ORCHESTRATOR   | INFO  | HeartbeatMonitor escutando em 127.0.0.1:5100
+2026-03-24 10:06:05 | L:0   | ORCHESTRATOR   | INFO  | Scheduler Round Robin iniciado
+2026-03-24 10:06:05 | L:1   | ORCHESTRATOR   | INFO  | MulticastSender iniciado → 224.1.1.1:7000 (intervalo=2.0s)
+2026-03-24 10:06:05 | L:1   | ORCHESTRATOR   | INFO  | Orquestrador Principal iniciado em 127.0.0.1:5000
+2026-03-24 10:06:05 | L:1   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=1 tasks=0 workers=0
+2026-03-24 10:06:05 | L:0   | BACKUP         | INFO  | MulticastReceiver escutando em 224.1.1.1:7000
+2026-03-24 10:06:05 | L:0   | BACKUP         | INFO  | SyncMonitor iniciado (timeout=18s)
+2026-03-24 10:06:05 | L:0   | BACKUP         | INFO  | Backup Orchestrator em standby. Escutando multicast para sincronização...
+2026-03-24 10:06:05 | L:1   | W1             | INFO  | Worker w1 iniciado em 127.0.0.1:6000
+2026-03-24 10:06:05 | L:2   | ORCHESTRATOR   | INFO  | Novo worker registrado: w1 em 127.0.0.1:6000
+2026-03-24 10:06:05 | L:2   | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=2
+2026-03-24 10:06:07 | L:4   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=4 tasks=0 workers=1
+2026-03-24 10:06:07 | L:5   | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=5 tasks=0 workers=1
+2026-03-24 10:06:07 | L:6   | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=6
+2026-03-24 10:06:09 | L:8   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=8 tasks=0 workers=1
+2026-03-24 10:06:09 | L:9   | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=9 tasks=0 workers=1
+2026-03-24 10:06:09 | L:10  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=10
+2026-03-24 10:06:11 | L:12  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=12 tasks=0 workers=1
+2026-03-24 10:06:11 | L:13  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=13 tasks=0 workers=1
+2026-03-24 10:06:11 | L:14  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=14
+2026-03-24 10:06:13 | L:16  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=16 tasks=0 workers=1
+2026-03-24 10:06:13 | L:17  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=17 tasks=0 workers=1
+2026-03-24 10:06:13 | L:18  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=18
+2026-03-24 10:06:15 | L:20  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=20 tasks=0 workers=1
+2026-03-24 10:06:15 | L:21  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=21 tasks=0 workers=1
+2026-03-24 10:06:15 | L:22  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=22
+2026-03-24 10:06:17 | L:24  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=24 tasks=0 workers=1
+2026-03-24 10:06:17 | L:25  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=25 tasks=0 workers=1
+2026-03-24 10:06:17 | L:26  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=26
+2026-03-24 10:06:19 | L:28  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=28 tasks=0 workers=1
+2026-03-24 10:06:19 | L:29  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=29 tasks=0 workers=1
+2026-03-24 10:06:19 | L:30  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=30
+2026-03-24 10:06:21 | L:32  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=32 tasks=0 workers=1
+2026-03-24 10:06:21 | L:33  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=33 tasks=0 workers=1
+2026-03-24 10:06:21 | L:34  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=34
+2026-03-24 10:06:23 | L:36  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=36 tasks=0 workers=1
+2026-03-24 10:06:23 | L:37  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=37 tasks=0 workers=1
+2026-03-24 10:06:23 | L:38  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=38
+2026-03-24 10:06:25 | L:40  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=40 tasks=0 workers=1
+2026-03-24 10:06:25 | L:41  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=41 tasks=0 workers=1
+2026-03-24 10:06:25 | L:42  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=42
+2026-03-24 10:06:27 | L:44  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=44 tasks=0 workers=1
+2026-03-24 10:06:27 | L:45  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=45 tasks=0 workers=1
+2026-03-24 10:06:27 | L:46  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=46
+2026-03-24 10:06:29 | L:48  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=48 tasks=0 workers=1
+2026-03-24 10:06:29 | L:49  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=49 tasks=0 workers=1
+2026-03-24 10:06:29 | L:50  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=50
+2026-03-24 10:06:31 | L:52  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=52 tasks=0 workers=1
+2026-03-24 10:06:31 | L:53  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=53 tasks=0 workers=1
+2026-03-24 10:06:31 | L:54  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=54
+2026-03-24 10:06:33 | L:56  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=56 tasks=0 workers=1
+2026-03-24 10:06:33 | L:57  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=57 tasks=0 workers=1
+2026-03-24 10:06:33 | L:58  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=58
+2026-03-24 10:06:35 | L:60  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=60 tasks=0 workers=1
+2026-03-24 10:06:35 | L:61  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=61 tasks=0 workers=1
+2026-03-24 10:06:35 | L:62  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=62
+2026-03-24 10:06:37 | L:64  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=64 tasks=0 workers=1
+2026-03-24 10:06:37 | L:65  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=65 tasks=0 workers=1
+2026-03-24 10:06:37 | L:66  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=66
+2026-03-24 10:06:39 | L:68  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=68 tasks=0 workers=1
+2026-03-24 10:06:39 | L:69  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=69 tasks=0 workers=1
+2026-03-24 10:06:39 | L:70  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=70
+2026-03-24 10:06:41 | L:72  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=72 tasks=0 workers=1
+2026-03-24 10:06:41 | L:73  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=73 tasks=0 workers=1
+2026-03-24 10:06:41 | L:74  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=74
+2026-03-24 10:06:43 | L:76  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=76 tasks=0 workers=1
+2026-03-24 10:06:43 | L:77  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=77 tasks=0 workers=1
+2026-03-24 10:06:43 | L:78  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=78
+2026-03-24 10:06:45 | L:80  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=80 tasks=0 workers=1
+2026-03-24 10:06:45 | L:81  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=81 tasks=0 workers=1
+2026-03-24 10:06:45 | L:82  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=82
+2026-03-24 10:06:47 | L:84  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=84 tasks=0 workers=1
+2026-03-24 10:06:47 | L:85  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=85 tasks=0 workers=1
+2026-03-24 10:06:47 | L:86  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=86
+2026-03-24 10:06:49 | L:88  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=88 tasks=0 workers=1
+2026-03-24 10:06:49 | L:89  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=89 tasks=0 workers=1
+2026-03-24 10:06:49 | L:90  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=90
+2026-03-24 10:06:51 | L:92  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=92 tasks=0 workers=1
+2026-03-24 10:06:51 | L:93  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=93 tasks=0 workers=1
+2026-03-24 10:06:51 | L:94  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=94
+2026-03-24 10:06:53 | L:96  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=96 tasks=0 workers=1
+2026-03-24 10:06:53 | L:97  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=97 tasks=0 workers=1
+2026-03-24 10:06:53 | L:98  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=98
+2026-03-24 10:06:55 | L:100 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=100 tasks=0 workers=1
+2026-03-24 10:06:55 | L:101 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=101 tasks=0 workers=1
+2026-03-24 10:06:55 | L:102 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=102
+2026-03-24 10:06:57 | L:104 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=104 tasks=0 workers=1
+2026-03-24 10:06:57 | L:105 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=105 tasks=0 workers=1
+2026-03-24 10:06:57 | L:106 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=106
+2026-03-24 10:06:59 | L:108 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=108 tasks=0 workers=1
+2026-03-24 10:06:59 | L:109 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=109 tasks=0 workers=1
+2026-03-24 10:06:59 | L:110 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=110
+2026-03-24 10:07:01 | L:112 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=112 tasks=0 workers=1
+2026-03-24 10:07:01 | L:113 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=113 tasks=0 workers=1
+2026-03-24 10:07:01 | L:114 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=114
+2026-03-24 10:07:03 | L:116 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=116 tasks=0 workers=1
+2026-03-24 10:07:03 | L:117 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=117 tasks=0 workers=1
+2026-03-24 10:07:03 | L:118 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=118
+2026-03-24 10:07:05 | L:120 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=120 tasks=0 workers=1
+2026-03-24 10:07:05 | L:121 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=121 tasks=0 workers=1
+2026-03-24 10:07:05 | L:122 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=122
+2026-03-24 10:07:07 | L:124 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=124 tasks=0 workers=1
+2026-03-24 10:07:07 | L:125 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=125 tasks=0 workers=1
+2026-03-24 10:07:07 | L:126 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=126
+2026-03-24 10:07:09 | L:128 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=128 tasks=0 workers=1
+2026-03-24 10:07:09 | L:129 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=129 tasks=0 workers=1
+2026-03-24 10:07:09 | L:130 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=130
+2026-03-24 10:07:11 | L:132 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=132 tasks=0 workers=1
+2026-03-24 10:07:11 | L:133 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=133 tasks=0 workers=1
+2026-03-24 10:07:11 | L:134 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=134
+2026-03-24 10:07:13 | L:136 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=136 tasks=0 workers=1
+2026-03-24 10:07:13 | L:137 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=137 tasks=0 workers=1
+2026-03-24 10:07:13 | L:138 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=138
+2026-03-24 10:07:15 | L:140 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=140 tasks=0 workers=1
+2026-03-24 10:07:15 | L:141 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=141 tasks=0 workers=1
+2026-03-24 10:07:15 | L:142 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=142
+2026-03-24 10:07:17 | L:144 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=144 tasks=0 workers=1
+2026-03-24 10:07:17 | L:145 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=145 tasks=0 workers=1
+2026-03-24 10:07:17 | L:146 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=146
+2026-03-24 10:07:19 | L:148 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=148 tasks=0 workers=1
+2026-03-24 10:07:19 | L:149 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=149 tasks=0 workers=1
+2026-03-24 10:07:19 | L:150 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=150
+2026-03-24 10:07:21 | L:152 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=152 tasks=0 workers=1
+2026-03-24 10:07:21 | L:153 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=153 tasks=0 workers=1
+2026-03-24 10:07:21 | L:154 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=154
+2026-03-24 10:07:23 | L:156 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=156 tasks=0 workers=1
+2026-03-24 10:07:23 | L:157 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=157 tasks=0 workers=1
+2026-03-24 10:07:23 | L:158 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=158
+2026-03-24 10:07:25 | L:160 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=160 tasks=0 workers=1
+2026-03-24 10:07:25 | L:161 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=161 tasks=0 workers=1
+2026-03-24 10:07:25 | L:162 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=162
+2026-03-24 10:07:27 | L:164 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=164 tasks=0 workers=1
+2026-03-24 10:07:27 | L:165 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=165 tasks=0 workers=1
+2026-03-24 10:07:27 | L:166 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=166
+2026-03-24 10:07:29 | L:169 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=169 tasks=0 workers=1
+2026-03-24 10:07:29 | L:170 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=170
+2026-03-24 10:07:31 | L:172 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=172 tasks=0 workers=1
+2026-03-24 10:07:31 | L:173 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=173 tasks=0 workers=1
+2026-03-24 10:07:31 | L:174 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=174
+2026-03-24 10:07:33 | L:176 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=176 tasks=0 workers=1
+2026-03-24 10:07:33 | L:177 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=177 tasks=0 workers=1
+2026-03-24 10:07:33 | L:178 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=178
+2026-03-24 10:07:35 | L:180 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=180 tasks=0 workers=1
+2026-03-24 10:07:35 | L:181 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=181 tasks=0 workers=1
+2026-03-24 10:07:35 | L:182 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=182
+2026-03-24 10:07:37 | L:184 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=184 tasks=0 workers=1
+2026-03-24 10:07:37 | L:185 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=185 tasks=0 workers=1
+2026-03-24 10:07:37 | L:186 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=186
+2026-03-24 10:07:39 | L:188 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=188 tasks=0 workers=1
+2026-03-24 10:07:39 | L:189 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=189 tasks=0 workers=1
+2026-03-24 10:07:39 | L:190 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=190
+2026-03-24 10:07:41 | L:193 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=193 tasks=0 workers=1
+2026-03-24 10:07:41 | L:194 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=194
+2026-03-24 10:07:43 | L:196 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=196 tasks=0 workers=1
+2026-03-24 10:07:43 | L:197 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=197 tasks=0 workers=1
+2026-03-24 10:07:43 | L:198 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=198
+2026-03-24 10:07:45 | L:200 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=200 tasks=0 workers=1
+2026-03-24 10:07:45 | L:201 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=201 tasks=0 workers=1
+2026-03-24 10:07:45 | L:202 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=202
+2026-03-24 10:07:47 | L:204 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=204 tasks=0 workers=1
+2026-03-24 10:07:47 | L:205 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=205 tasks=0 workers=1
+2026-03-24 10:07:47 | L:206 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=206
+2026-03-24 10:07:49 | L:208 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=208 tasks=0 workers=1
+2026-03-24 10:07:49 | L:209 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=209 tasks=0 workers=1
+2026-03-24 10:07:49 | L:210 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=210
+2026-03-24 10:07:51 | L:212 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=212 tasks=0 workers=1
+2026-03-24 10:07:51 | L:213 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=213 tasks=0 workers=1
+2026-03-24 10:07:51 | L:214 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=214
+2026-03-24 10:07:53 | L:216 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=216 tasks=0 workers=1
+2026-03-24 10:07:53 | L:217 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=217 tasks=0 workers=1
+2026-03-24 10:07:53 | L:218 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=218
+2026-03-24 10:07:55 | L:220 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=220 tasks=0 workers=1
+2026-03-24 10:07:55 | L:221 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=221 tasks=0 workers=1
+2026-03-24 10:07:55 | L:222 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=222
+2026-03-24 10:07:57 | L:224 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=224 tasks=0 workers=1
+2026-03-24 10:07:57 | L:225 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=225 tasks=0 workers=1
+2026-03-24 10:07:57 | L:226 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=226
+2026-03-24 10:07:59 | L:228 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=228 tasks=0 workers=1
+2026-03-24 10:07:59 | L:229 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=229 tasks=0 workers=1
+2026-03-24 10:07:59 | L:230 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=230
+2026-03-24 10:08:01 | L:232 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=232 tasks=0 workers=1
+2026-03-24 10:08:01 | L:233 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=233 tasks=0 workers=1
+2026-03-24 10:08:01 | L:234 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=234
+2026-03-24 10:08:03 | L:236 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=236 tasks=0 workers=1
+2026-03-24 10:08:03 | L:237 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=237 tasks=0 workers=1
+2026-03-24 10:08:03 | L:238 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=238
+2026-03-24 10:08:05 | L:240 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=240 tasks=0 workers=1
+2026-03-24 10:08:05 | L:241 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=241 tasks=0 workers=1
+2026-03-24 10:08:05 | L:242 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=242
+2026-03-24 10:08:07 | L:244 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=244 tasks=0 workers=1
+2026-03-24 10:08:07 | L:245 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=245 tasks=0 workers=1
+2026-03-24 10:08:07 | L:246 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=246
+2026-03-24 10:08:09 | L:248 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=248 tasks=0 workers=1
+2026-03-24 10:08:09 | L:249 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=249 tasks=0 workers=1
+2026-03-24 10:08:09 | L:250 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=250
+2026-03-24 10:08:11 | L:252 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=252 tasks=0 workers=1
+2026-03-24 10:08:11 | L:253 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=253 tasks=0 workers=1
+2026-03-24 10:08:12 | L:254 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=254
+2026-03-24 10:08:13 | L:256 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=256 tasks=0 workers=1
+2026-03-24 10:08:13 | L:257 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=257 tasks=0 workers=1
+2026-03-24 10:08:14 | L:258 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=258
+2026-03-24 10:08:15 | L:260 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=260 tasks=0 workers=1
+2026-03-24 10:08:15 | L:261 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=261 tasks=0 workers=1
+2026-03-24 10:08:16 | L:262 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=262
+2026-03-24 10:08:17 | L:264 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=264 tasks=0 workers=1
+2026-03-24 10:08:17 | L:265 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=265 tasks=0 workers=1
+2026-03-24 10:08:18 | L:266 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=266
+2026-03-24 10:08:19 | L:268 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=268 tasks=0 workers=1
+2026-03-24 10:08:19 | L:269 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=269 tasks=0 workers=1
+2026-03-24 10:08:20 | L:270 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=270
+2026-03-24 10:08:21 | L:272 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=272 tasks=0 workers=1
+2026-03-24 10:08:21 | L:273 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=273 tasks=0 workers=1
+2026-03-24 10:08:22 | L:274 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=274
+2026-03-24 10:08:23 | L:276 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=276 tasks=0 workers=1
+2026-03-24 10:08:23 | L:277 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=277 tasks=0 workers=1
+2026-03-24 10:08:24 | L:278 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=278
+2026-03-24 10:08:25 | L:280 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=280 tasks=0 workers=1
+2026-03-24 10:08:25 | L:281 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=281 tasks=0 workers=1
+2026-03-24 10:08:26 | L:282 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=282
+2026-03-24 10:08:27 | L:284 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=284 tasks=0 workers=1
+2026-03-24 10:08:27 | L:285 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=285 tasks=0 workers=1
+2026-03-24 10:08:28 | L:286 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=286
+2026-03-24 10:08:29 | L:288 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=288 tasks=0 workers=1
+2026-03-24 10:08:29 | L:289 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=289 tasks=0 workers=1
+2026-03-24 10:08:30 | L:290 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=290
+2026-03-24 10:08:31 | L:292 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=292 tasks=0 workers=1
+2026-03-24 10:08:31 | L:293 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=293 tasks=0 workers=1
+2026-03-24 10:08:32 | L:294 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=294
+2026-03-24 10:08:33 | L:296 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=296 tasks=0 workers=1
+2026-03-24 10:08:33 | L:297 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=297 tasks=0 workers=1
+2026-03-24 10:08:34 | L:298 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=298
+2026-03-24 10:08:35 | L:300 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=300 tasks=0 workers=1
+2026-03-24 10:08:35 | L:301 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=301 tasks=0 workers=1
+2026-03-24 10:08:36 | L:302 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=302
+2026-03-24 10:08:37 | L:304 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=304 tasks=0 workers=1
+2026-03-24 10:08:37 | L:305 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=305 tasks=0 workers=1
+2026-03-24 10:08:37 | L:0   | ORCHESTRATOR   | INFO  | HeartbeatMonitor escutando em 127.0.0.1:5100
+2026-03-24 10:08:37 | L:0   | ORCHESTRATOR   | INFO  | Scheduler Round Robin iniciado
+2026-03-24 10:08:37 | L:306 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=306 tasks=0 workers=0
+2026-03-24 10:08:37 | L:1   | ORCHESTRATOR   | INFO  | MulticastSender iniciado → 224.1.1.1:7000 (intervalo=2.0s)
+2026-03-24 10:08:37 | L:1   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=1 tasks=0 workers=0
+2026-03-24 10:08:37 | L:1   | ORCHESTRATOR   | INFO  | Orquestrador Principal iniciado em 127.0.0.1:5000
+2026-03-24 10:08:37 | L:0   | BACKUP         | INFO  | MulticastReceiver escutando em 224.1.1.1:7000
+2026-03-24 10:08:37 | L:0   | BACKUP         | INFO  | SyncMonitor iniciado (timeout=18s)
+2026-03-24 10:08:37 | L:0   | BACKUP         | INFO  | Backup Orchestrator em standby. Escutando multicast para sincronização...
+2026-03-24 10:08:37 | L:1   | W1             | INFO  | Worker w1 iniciado em 127.0.0.1:6000
+2026-03-24 10:08:37 | L:305 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=305
+2026-03-24 10:08:38 | L:307 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=307
+2026-03-24 10:08:39 | L:310 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=310 tasks=0 workers=1
+2026-03-24 10:08:39 | L:310 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=310 tasks=0 workers=1
+2026-03-24 10:08:39 | L:311 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=311 tasks=0 workers=0
+2026-03-24 10:08:39 | L:311 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=311 tasks=0 workers=0
+2026-03-24 10:08:39 | L:2   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=2 tasks=0 workers=0
+2026-03-24 10:08:39 | L:310 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=310
+2026-03-24 10:08:40 | L:312 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=312
+2026-03-24 10:08:40 | L:0   | CLIENT         | INFO  | Conectado ao orquestrador em 127.0.0.1:5000
+2026-03-24 10:08:40 | L:313 | ORCHESTRATOR   | DEBUG | Nova conexão de 127.0.0.1:56367
+2026-03-24 10:08:40 | L:316 | ORCHESTRATOR   | INFO  | [LOGIN_OK] user=alice token=tok_3852f47d… lamport=315
+2026-03-24 10:08:40 | L:318 | ORCHESTRATOR   | INFO  | [TASK_SUBMITTED] task=T-001 client=alice lamport=318
+2026-03-24 10:08:40 | L:319 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=319 tasks=1 workers=1
+2026-03-24 10:08:40 | L:320 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=320 tasks=1 workers=1
+2026-03-24 10:08:40 | L:320 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=320 tasks=1 workers=1
+2026-03-24 10:08:40 | L:322 | W1             | INFO  | [TASK_RECEIVED] task=T-001 client=alice
+2026-03-24 10:08:40 | L:323 | ORCHESTRATOR   | INFO  | [TASK_DISTRIBUTED] task=T-001 worker=w1 lamport=320
+2026-03-24 10:08:40 | L:322 | W1             | INFO  | [TASK_STARTED] task=T-001
+2026-03-24 10:08:41 | L:324 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=324 tasks=1 workers=1
+2026-03-24 10:08:41 | L:325 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=325 tasks=1 workers=1
+2026-03-24 10:08:41 | L:325 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=325 tasks=1 workers=1
+2026-03-24 10:08:41 | L:325 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=325
+2026-03-24 10:08:42 | L:327 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=327
+2026-03-24 10:08:42 | L:330 | W1             | INFO  | [TASK_COMPLETED] task=T-001 worker=w1 lamport=330
+2026-03-24 10:08:42 | L:328 | ORCHESTRATOR   | DEBUG | Nova conexão de 127.0.0.1:56371
+2026-03-24 10:08:42 | L:332 | ORCHESTRATOR   | INFO  | [TASK_COMPLETED] task=T-001 worker=w1 lamport=332
+2026-03-24 10:08:42 | L:334 | W1             | DEBUG | Resultado de T-001 entregue ao orquestrador
+2026-03-24 10:08:42 | L:334 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=334 tasks=1 workers=1
+2026-03-24 10:08:42 | L:334 | ORCHESTRATOR   | DEBUG | Tasks[total=1 pending=0 running=0 done=1 failed=0] Workers[alive=1/1] RR_index=0
+2026-03-24 10:08:42 | L:335 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=335 tasks=1 workers=1
+2026-03-24 10:08:42 | L:335 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=335 tasks=1 workers=1
+2026-03-24 10:08:43 | L:335 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=335 tasks=1 workers=1
+2026-03-24 10:08:43 | L:336 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=336 tasks=1 workers=1
+2026-03-24 10:08:43 | L:336 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=336 tasks=1 workers=1
+2026-03-24 10:08:43 | L:336 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=336
+2026-03-24 10:08:44 | L:338 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=338
+2026-03-24 10:08:45 | L:340 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=340 tasks=1 workers=1
+2026-03-24 10:08:45 | L:341 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=341 tasks=1 workers=1
+2026-03-24 10:08:45 | L:341 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=341 tasks=1 workers=1
+2026-03-24 10:08:45 | L:341 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=341
+2026-03-24 10:08:46 | L:343 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=343
+2026-03-24 10:08:47 | L:345 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=345 tasks=1 workers=1
+2026-03-24 10:08:47 | L:346 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=346 tasks=1 workers=1
+2026-03-24 10:08:47 | L:346 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=346 tasks=1 workers=1
+2026-03-24 10:08:47 | L:346 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=346
+2026-03-24 10:08:48 | L:348 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=348
+2026-03-24 10:08:49 | L:350 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=350 tasks=1 workers=1
+2026-03-24 10:08:49 | L:351 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=351 tasks=1 workers=1
+2026-03-24 10:08:49 | L:351 | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=351 tasks=1 workers=1
+2026-03-24 10:08:49 | L:351 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=351
+2026-03-24 10:08:50 | L:353 | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=353
+2026-03-24 10:08:50 | L:351 | BACKUP         | INFO  | Encerrando backup...
+2026-03-24 10:08:50 | L:354 | ORCHESTRATOR   | INFO  | Encerrando orquestrador...
+2026-03-24 10:08:51 | L:355 | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=355 tasks=1 workers=1
+2026-03-24 10:08:51 | L:353 | W1             | INFO  | Encerrando worker w1...
+2026-03-24 10:08:52 | L:356 | W1             | INFO  | Encerrando worker w1...
+2026-03-24 10:09:38 | L:0   | ORCHESTRATOR   | INFO  | HeartbeatMonitor escutando em 127.0.0.1:5100
+2026-03-24 10:09:38 | L:0   | ORCHESTRATOR   | INFO  | Scheduler Round Robin iniciado
+2026-03-24 10:09:38 | L:1   | ORCHESTRATOR   | INFO  | MulticastSender iniciado → 224.1.1.1:7000 (intervalo=2.0s)
+2026-03-24 10:09:38 | L:1   | ORCHESTRATOR   | INFO  | Orquestrador Principal iniciado em 127.0.0.1:5000
+2026-03-24 10:09:38 | L:1   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=1 tasks=0 workers=0
+2026-03-24 10:09:38 | L:0   | BACKUP         | INFO  | MulticastReceiver escutando em 224.1.1.1:7000
+2026-03-24 10:09:38 | L:2   | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=2 tasks=0 workers=0
+2026-03-24 10:09:38 | L:2   | BACKUP         | INFO  | SyncMonitor iniciado (timeout=18s)
+2026-03-24 10:09:38 | L:2   | BACKUP         | INFO  | Backup Orchestrator em standby. Escutando multicast para sincronização...
+2026-03-24 10:09:38 | L:1   | W1             | INFO  | Worker w1 iniciado em 127.0.0.1:6000
+2026-03-24 10:09:38 | L:2   | ORCHESTRATOR   | INFO  | Novo worker registrado: w1 em 127.0.0.1:6000
+2026-03-24 10:09:38 | L:2   | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=2
+2026-03-24 10:09:40 | L:4   | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=4 tasks=0 workers=1
+2026-03-24 10:09:40 | L:5   | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=5 tasks=0 workers=1
+2026-03-24 10:09:40 | L:6   | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=6
+2026-03-24 10:09:41 | L:0   | CLIENT         | INFO  | Conectado ao orquestrador em 127.0.0.1:5000
+2026-03-24 10:09:41 | L:7   | ORCHESTRATOR   | DEBUG | Nova conexão de 127.0.0.1:50779
+2026-03-24 10:09:41 | L:10  | ORCHESTRATOR   | INFO  | [LOGIN_OK] user=alice token=tok_3852f47d… lamport=9
+2026-03-24 10:09:41 | L:12  | ORCHESTRATOR   | INFO  | [TASK_SUBMITTED] task=T-001 client=alice lamport=12
+2026-03-24 10:09:41 | L:13  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=13 tasks=1 workers=1
+2026-03-24 10:09:41 | L:14  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=14 tasks=1 workers=1
+2026-03-24 10:09:41 | L:16  | W1             | INFO  | [TASK_RECEIVED] task=T-001 client=alice
+2026-03-24 10:09:41 | L:17  | ORCHESTRATOR   | INFO  | [TASK_DISTRIBUTED] task=T-001 worker=w1 lamport=14
+2026-03-24 10:09:41 | L:16  | W1             | INFO  | [TASK_STARTED] task=T-001
+2026-03-24 10:09:42 | L:18  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=18 tasks=1 workers=1
+2026-03-24 10:09:42 | L:19  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=19 tasks=1 workers=1
+2026-03-24 10:09:42 | L:19  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=19
+2026-03-24 10:09:44 | L:21  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=21 tasks=1 workers=1
+2026-03-24 10:09:44 | L:22  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=22 tasks=1 workers=1
+2026-03-24 10:09:44 | L:23  | ORCHESTRATOR   | DEBUG | [HEARTBEAT] worker=w1 lamport=23
+2026-03-24 10:09:44 | L:26  | W1             | INFO  | [TASK_COMPLETED] task=T-001 worker=w1 lamport=26
+2026-03-24 10:09:44 | L:24  | ORCHESTRATOR   | DEBUG | Nova conexão de 127.0.0.1:50783
+2026-03-24 10:09:44 | L:28  | ORCHESTRATOR   | INFO  | [TASK_COMPLETED] task=T-001 worker=w1 lamport=28
+2026-03-24 10:09:44 | L:30  | W1             | DEBUG | Resultado de T-001 entregue ao orquestrador
+2026-03-24 10:09:44 | L:30  | ORCHESTRATOR   | DEBUG | [STATE_SYNC] lamport=30 tasks=1 workers=1
+2026-03-24 10:09:44 | L:30  | ORCHESTRATOR   | DEBUG | Tasks[total=1 pending=0 running=0 done=1 failed=0] Workers[alive=1/1] RR_index=0
+2026-03-24 10:09:44 | L:31  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=31 tasks=1 workers=1
+2026-03-24 10:09:48 | L:31  | W1             | DEBUG | Heartbeat falhou: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-03-24 10:09:48 | L:31  | W1             | WARNING | Falha na conexão. Alternando para Orquestrador BACKUP.
+2026-03-24 10:09:52 | L:32  | W1             | DEBUG | Heartbeat falhou: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-03-24 10:09:52 | L:32  | W1             | WARNING | Falha na conexão. Alternando para Orquestrador PRINCIPAL.
+2026-03-24 10:09:56 | L:33  | W1             | DEBUG | Heartbeat falhou: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-03-24 10:09:56 | L:33  | W1             | WARNING | Falha na conexão. Alternando para Orquestrador BACKUP.
+2026-03-24 10:10:00 | L:34  | W1             | DEBUG | Heartbeat falhou: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-03-24 10:10:00 | L:34  | W1             | WARNING | Falha na conexão. Alternando para Orquestrador PRINCIPAL.
+2026-03-24 10:10:04 | L:35  | W1             | DEBUG | Heartbeat falhou: [WinError 10061] No connection could be made because the target machine actively refused it
+2026-03-24 10:10:04 | L:35  | W1             | WARNING | Falha na conexão. Alternando para Orquestrador BACKUP.
+2026-03-24 10:10:08 | L:31  | BACKUP         | WARNING | Orquestrador principal sem sync há 23.9s (timeout=18s) — iniciando failover
+2026-03-24 10:10:08 | L:32  | BACKUP         | CRITICAL | [FAILOVER] from=ORCHESTRATOR-PRIMARY to=BACKUP lamport=32
+2026-03-24 10:10:08 | L:32  | BACKUP         | CRITICAL | ═══════════════════════════════════════════
+   🔄 FAILOVER: Backup assumindo como PRIMÁRIO!
+═══════════════════════════════════════════
+2026-03-24 10:10:08 | L:32  | BACKUP-PRIMARY | INFO  | HeartbeatMonitor escutando em 127.0.0.1:5101
+2026-03-24 10:10:08 | L:32  | BACKUP-PRIMARY | INFO  | Scheduler Round Robin iniciado
+2026-03-24 10:10:08 | L:33  | BACKUP-PRIMARY | INFO  | MulticastSender iniciado → 224.1.1.1:7000 (intervalo=2.0s)
+2026-03-24 10:10:08 | L:34  | BACKUP         | DEBUG | [STATE_SYNC] recebido de 192.168.0.112 lamport=34 tasks=1 workers=1
+2026-03-24 10:10:08 | L:34  | BACKUP-PRIMARY | DEBUG | [STATE_SYNC] lamport=33 tasks=1 workers=1
+2026-03-24 10:10:08 | L:34  | BACKUP         | INFO  | Backup agora escutando clientes em 127.0.0.1:5001
+2026-03-24 10:10:08 | L:37  | BACKUP-PRIMARY | DEBUG | [HEARTBEAT] worker=w1 lamport=37
+2026-03-24 10:10:09 | L:0   | CLIENT         | INFO  | Conectado ao orquestrador em 127.0.0.1:5001
+2026-03-24 10:10:09 | L:41  | BACKUP         | INFO  | [LOGIN_OK] user=alice lamport=40

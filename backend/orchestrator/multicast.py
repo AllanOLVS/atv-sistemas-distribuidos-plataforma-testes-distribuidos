@@ -145,7 +145,7 @@ class MulticastReceiver:
  
         # Entrar no grupo multicast
         group_bin = socket.inet_aton(self.group)
-        mreq = struct.pack("4sL", group_bin, socket.INADDR_ANY)
+        mreq = struct.pack("4sl", group_bin, socket.INADDR_ANY)
         sock.setsockopt(
             socket.IPPROTO_IP,
             socket.IP_ADD_MEMBERSHIP,

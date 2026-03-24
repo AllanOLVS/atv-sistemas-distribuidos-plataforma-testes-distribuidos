@@ -33,6 +33,7 @@ from common.logger  import (
 )
 from common.protocol import (
     MSG_LOGIN, MSG_SUBMIT_TASK, MSG_QUERY_STATUS, MSG_TASK_RESULT,
+    MSG_ACK, _base,
     TASK_COMPLETED, TASK_FAILED,
     msg_login_ok, msg_login_fail,
     msg_task_accepted, msg_task_rejected,
@@ -289,7 +290,7 @@ class Orchestrator:
         result    = msg.get("result")
         error     = msg.get("error", "")
         worker_id = msg.get("sender", "")
-        ts        = self.clock.receive(msg.get("lamport", 0))
+        ts        = self.clock.value
  
         if status == TASK_COMPLETED:
             self.state.complete_task(task_id, result)
@@ -299,7 +300,6 @@ class Orchestrator:
             log_task_failed(self.logger, task_id, worker_id, error, ts)
  
         # Confirma recebimento ao worker
-        from common.protocol import MSG_ACK, _base
         send_msg(conn, _base(MSG_ACK, "ORCHESTRATOR", self.clock.send()))
  
         # Força sincronização com backup

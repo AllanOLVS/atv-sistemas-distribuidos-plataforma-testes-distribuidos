@@ -1,1 +1,0 @@
-# recebe/replica estado via UDP

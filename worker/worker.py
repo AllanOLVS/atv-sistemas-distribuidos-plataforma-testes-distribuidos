@@ -1,1 +1,0 @@
-# executa tarefa, envia heartbeat

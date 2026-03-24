@@ -257,7 +257,7 @@ class GlobalState:
             running = sum(1 for t in self._tasks.values() if t.status == TASK_RUNNING)
             done    = sum(1 for t in self._tasks.values() if t.status == TASK_COMPLETED)
             failed  = sum(1 for t in self._tasks.values() if t.status == TASK_FAILED)
-            workers_alive = len(self.get_alive_workers())
+            workers_alive = sum(1 for w in self._workers.values() if w.status == "ALIVE")
             return (
                 f"Tasks[total={total} pending={pending} running={running} "
                 f"done={done} failed={failed}] "
