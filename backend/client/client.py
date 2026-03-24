@@ -18,7 +18,7 @@ import uuid
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from common.config  import ORCHESTRATOR_HOST, ORCHESTRATOR_PORT
+from common.config  import ORCHESTRATOR_HOST, ORCHESTRATOR_PORT, ORCHESTRATOR_ENDPOINTS
 from common.lamport import LamportClock
 from common.logger  import get_logger
 from common.protocol import (
@@ -48,22 +48,32 @@ class Client:
         self.auth  = Auth(self.clock, sender="CLIENT")
         self._sock = None
         self._submitted_tasks: list[str] = []
+        self._username = ""
+        self._password = ""
+        self._endpoints = [(host, port)]
+        for endpoint in ORCHESTRATOR_ENDPOINTS:
+            if endpoint not in self._endpoints:
+                self._endpoints.append(endpoint)
 
     # ── Conexão ──────────────────────────────────────────────
 
     def connect(self) -> bool:
         """Conecta ao orquestrador."""
-        try:
-            self._sock = socket.create_connection(
-                (self.host, self.port), timeout=10
-            )
-            self.logger.info(
-                f"Conectado ao orquestrador em {self.host}:{self.port}"
-            )
-            return True
-        except Exception as e:
-            print(f"\n✗ Erro ao conectar: {e}")
-            return False
+        last_error = None
+        for host, port in self._endpoints:
+            try:
+                self._sock = socket.create_connection((host, port), timeout=10)
+                self.host = host
+                self.port = port
+                self.logger.info(
+                    f"Conectado ao orquestrador em {self.host}:{self.port}"
+                )
+                return True
+            except Exception as e:
+                last_error = e
+
+        print(f"\n✗ Erro ao conectar: {last_error}")
+        return False
 
     def disconnect(self) -> None:
         if self._sock:
@@ -87,6 +97,8 @@ class Client:
 
         token = self.auth.login(self._sock, username, password)
         if token:
+            self._username = username
+            self._password = password
             print(f"  ✓ Login bem-sucedido! Token: {token[:16]}…")
             self.logger.info(f"[LOGIN_OK] user={username}")
             return True
@@ -140,10 +152,7 @@ class Client:
             task_id=task_id,
             payload=payload,
         )
-        send_msg(self._sock, msg)
-
-        # Aguarda resposta
-        resp = recv_msg(self._sock)
+        resp = self._send_with_failover(msg)
         if resp is None:
             print("  ✗ Sem resposta do orquestrador.")
             return
@@ -194,9 +203,7 @@ class Client:
             token=self.auth.get_token(),
             task_id=task_id,
         )
-        send_msg(self._sock, msg)
-
-        resp = recv_msg(self._sock)
+        resp = self._send_with_failover(msg)
         if resp is None:
             print("  ✗ Sem resposta do orquestrador.")
             return
@@ -251,9 +258,7 @@ class Client:
                 task_id=task_id,
                 payload=payload,
             )
-            send_msg(self._sock, msg)
-
-            resp = recv_msg(self._sock)
+            resp = self._send_with_failover(msg)
             if resp and resp.get("type") == MSG_TASK_ACCEPTED:
                 self._submitted_tasks.append(task_id)
                 print(f"  ✓ [{i+1}/{count}] {task_id} ({op}) aceita")
@@ -263,6 +268,31 @@ class Client:
                 print(f"  ✗ [{i+1}/{count}] {task_id} rejeitada: {reason}")
 
         print(f"\n  Total submetidas: {len(self._submitted_tasks)}")
+
+    def _reconnect_and_reauth(self) -> bool:
+        self.disconnect()
+        if not self.connect():
+            return False
+        if self._username and self._password:
+            token = self.auth.login(self._sock, self._username, self._password)
+            return token is not None
+        return True
+
+    def _send_with_failover(self, msg: dict):
+        """Envia requisição com uma tentativa de reconexão/failover."""
+        try:
+            send_msg(self._sock, msg)
+            return recv_msg(self._sock)
+        except Exception:
+            self.logger.warning("Falha de conexão. Tentando failover...")
+            if not self._reconnect_and_reauth():
+                return None
+
+        try:
+            send_msg(self._sock, msg)
+            return recv_msg(self._sock)
+        except Exception:
+            return None
 
     # ── Consulta de todas as tarefas ─────────────────────────
 
@@ -284,8 +314,7 @@ class Client:
                 token=self.auth.get_token(),
                 task_id=tid,
             )
-            send_msg(self._sock, msg)
-            resp = recv_msg(self._sock)
+            resp = self._send_with_failover(msg)
 
             if resp and resp.get("type") == MSG_TASK_STATUS:
                 self.clock.receive(resp.get("lamport", 0))

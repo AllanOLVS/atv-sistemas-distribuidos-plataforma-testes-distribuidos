@@ -30,6 +30,7 @@ from common.lamport import LamportClock
 from common.logger  import (
     get_logger,
     log_task_submitted, log_task_completed, log_task_failed,
+    log_task_late_result_ignored,
 )
 from common.protocol import (
     MSG_LOGIN, MSG_SUBMIT_TASK, MSG_QUERY_STATUS, MSG_TASK_RESULT,
@@ -291,6 +292,12 @@ class Orchestrator:
         error     = msg.get("error", "")
         worker_id = msg.get("sender", "")
         ts        = self.clock.value
+
+        can_apply, reason = self.state.can_accept_task_result(task_id, worker_id)
+        if not can_apply:
+            log_task_late_result_ignored(self.logger, task_id, worker_id, reason, ts)
+            send_msg(conn, _base(MSG_ACK, "ORCHESTRATOR", self.clock.send()))
+            return
  
         if status == TASK_COMPLETED:
             self.state.complete_task(task_id, result)

@@ -27,6 +27,8 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from common.config import (
     ORCHESTRATOR_HOST, ORCHESTRATOR_PORT,
+    BACKUP_HOST, BACKUP_PORT,
+    ORCHESTRATOR_ENDPOINTS,
     WORKER_BASE_PORT,
     HEARTBEAT_INTERVAL,
 )
@@ -73,6 +75,10 @@ class Worker:
         # Simulação de crash
         self._simulate_crash_after = simulate_crash_after
         self._tasks_completed = 0
+        self._orchestrator_endpoints = list(ORCHESTRATOR_ENDPOINTS)
+        self._active_endpoint = (ORCHESTRATOR_HOST, ORCHESTRATOR_PORT)
+        if self._active_endpoint not in self._orchestrator_endpoints:
+            self._orchestrator_endpoints.insert(0, self._active_endpoint)
 
     # ── Controle ─────────────────────────────────────────────
 
@@ -209,29 +215,30 @@ class Worker:
 
     def _send_result_to_orchestrator(self, msg: dict) -> None:
         """Conecta ao orquestrador e envia MSG_TASK_RESULT."""
-        try:
-            with socket.create_connection(
-                (ORCHESTRATOR_HOST, ORCHESTRATOR_PORT), timeout=10
-            ) as sock:
-                send_msg(sock, msg)
-                # Aguarda ACK do orquestrador
-                ack = recv_msg(sock)
-                if ack and ack.get("type") == MSG_ACK:
-                    self.clock.receive(ack.get("lamport", 0))
-                    self.logger.debug(
-                        f"Resultado de {msg.get('task_id')} entregue ao orquestrador"
-                    )
-        except Exception as e:
-            self.logger.error(
-                f"Erro ao enviar resultado de {msg.get('task_id')}: {e}"
-            )
+        last_error = None
+        for host, port in self._iter_endpoints(self._active_endpoint):
+            try:
+                with socket.create_connection((host, port), timeout=10) as sock:
+                    send_msg(sock, msg)
+                    ack = recv_msg(sock)
+                    if ack and ack.get("type") == MSG_ACK:
+                        self.clock.receive(ack.get("lamport", 0))
+                        self._active_endpoint = (host, port)
+                        self.logger.debug(
+                            f"Resultado de {msg.get('task_id')} entregue em {host}:{port}"
+                        )
+                        return
+            except Exception as e:
+                last_error = e
+
+        self.logger.error(
+            f"Erro ao enviar resultado de {msg.get('task_id')}: {last_error}"
+        )
 
     # ── Heartbeat ────────────────────────────────────────────
 
     def _heartbeat_loop(self) -> None:
         """Envia heartbeat periódico ao HeartbeatMonitor do orquestrador."""
-        hb_port = ORCHESTRATOR_PORT + 100   # Ex: 5000 → 5100
-
         while not self._stop_event.is_set():
             try:
                 with self._tasks_lock:
@@ -247,18 +254,40 @@ class Worker:
                 hb["worker_port"] = self.port
                 hb["worker_host"] = self.host
 
-                with socket.create_connection(
-                    (ORCHESTRATOR_HOST, hb_port), timeout=5
-                ) as sock:
-                    send_msg(sock, hb)
-                    ack = recv_msg(sock)
-                    if ack:
-                        self.clock.receive(ack.get("lamport", 0))
+                delivered = False
+                for host, port in self._iter_endpoints(self._active_endpoint):
+                    hb_port = port + 100
+                    try:
+                        with socket.create_connection((host, hb_port), timeout=5) as sock:
+                            send_msg(sock, hb)
+                            ack = recv_msg(sock)
+                            if ack:
+                                self.clock.receive(ack.get("lamport", 0))
+                                self._active_endpoint = (host, port)
+                                delivered = True
+                                break
+                    except Exception:
+                        continue
+
+                if not delivered:
+                    self.logger.debug("Heartbeat nao entregue em nenhum endpoint")
 
             except Exception as e:
                 self.logger.debug(f"Heartbeat falhou: {e}")
 
             time.sleep(HEARTBEAT_INTERVAL)
+
+    def _iter_endpoints(self, preferred: tuple[str, int]):
+        candidates = [preferred]
+        for endpoint in self._orchestrator_endpoints:
+            if endpoint not in candidates:
+                candidates.append(endpoint)
+
+        fallback_backup = (BACKUP_HOST, BACKUP_PORT)
+        if fallback_backup not in candidates:
+            candidates.append(fallback_backup)
+
+        return candidates
 
 
 # ════════════════════════════════════════════════════════════

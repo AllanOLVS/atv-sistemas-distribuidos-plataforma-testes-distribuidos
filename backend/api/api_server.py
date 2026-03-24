@@ -31,6 +31,8 @@ from flask_cors import CORS
 
 from common.config import (
     ORCHESTRATOR_HOST, ORCHESTRATOR_PORT,
+    BACKUP_HOST, BACKUP_PORT,
+    ORCHESTRATOR_ENDPOINTS,
     USERS, TOKEN_SECRET,
 )
 from common.lamport import LamportClock
@@ -48,6 +50,15 @@ CORS(app)
 _clock = LamportClock()
 _sessions = {}          # token → {username, socket, lock, tasks[]}
 _sessions_lock = threading.Lock()
+_endpoint_lock = threading.Lock()
+_active_endpoint = (ORCHESTRATOR_HOST, ORCHESTRATOR_PORT)
+_all_endpoints = [
+    _active_endpoint,
+    (BACKUP_HOST, BACKUP_PORT),
+]
+for endpoint in ORCHESTRATOR_ENDPOINTS:
+    if endpoint not in _all_endpoints:
+        _all_endpoints.append(endpoint)
 
 
 # ── Helpers ───────────────────────────────────────────────────
@@ -65,10 +76,27 @@ def _get_session(token: str):
 
 def _create_connection():
     """Cria nova conexão TCP ao orquestrador."""
-    sock = socket.create_connection(
-        (ORCHESTRATOR_HOST, ORCHESTRATOR_PORT), timeout=10
-    )
-    return sock
+    global _active_endpoint
+    with _endpoint_lock:
+        preferred = _active_endpoint
+    candidates = [preferred] + [e for e in _all_endpoints if e != preferred]
+
+    last_error = None
+    for host, port in candidates:
+        try:
+            sock = socket.create_connection((host, port), timeout=10)
+            with _endpoint_lock:
+                _active_endpoint = (host, port)
+            return sock
+        except Exception as e:
+            last_error = e
+
+    raise ConnectionError(f"Nenhum endpoint ativo: {last_error}")
+
+
+def _get_active_endpoint():
+    with _endpoint_lock:
+        return _active_endpoint
 
 
 def _safe_send_recv(session, msg):
@@ -321,12 +349,17 @@ def system_status():
         for s in _sessions.values():
             total_tasks += len(s["tasks"])
 
+    active_host, active_port = _get_active_endpoint()
+
     return jsonify({
         "orchestrator": {
-            "host": ORCHESTRATOR_HOST,
-            "port": ORCHESTRATOR_PORT,
+            "host": active_host,
+            "port": active_port,
             "status": "ONLINE",
         },
+        "candidate_orchestrators": [
+            {"host": host, "port": port} for host, port in _all_endpoints
+        ],
         "active_sessions": active_sessions,
         "total_tasks_submitted": total_tasks,
         "users_available": list(USERS.keys()),

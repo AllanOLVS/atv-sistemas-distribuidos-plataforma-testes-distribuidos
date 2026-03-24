@@ -28,12 +28,14 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 from common.config import (
     BACKUP_HOST, BACKUP_PORT,
     ORCHESTRATOR_HOST, ORCHESTRATOR_PORT,
+    FAILOVER_RECOVERY_GRACE_SECONDS,
     USERS, TOKEN_SECRET,
 )
 from common.lamport  import LamportClock
 from common.logger   import (
     get_logger, log_failover,
     log_task_submitted, log_task_completed, log_task_failed,
+    log_task_recovery_marked, log_task_late_result_ignored,
 )
 from common.protocol import (
     MSG_LOGIN, MSG_SUBMIT_TASK, MSG_QUERY_STATUS, MSG_TASK_RESULT,
@@ -143,6 +145,36 @@ class BackupOrchestrator:
         )
 
         self._is_primary = True
+        # Preferencia por transparência: assumir a porta do primário.
+        # Se ainda estiver ocupada, usa a porta de backup.
+        promoted_port = ORCHESTRATOR_PORT
+        test_sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        test_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        try:
+            test_sock.bind((self.host, promoted_port))
+            self.port = promoted_port
+        except OSError:
+            self.port = BACKUP_PORT
+            self.logger.warning(
+                f"Porta {ORCHESTRATOR_PORT} indisponível; mantendo backup em {self.port}"
+            )
+        finally:
+            try:
+                test_sock.close()
+            except OSError:
+                pass
+
+        marked = self.state.mark_running_tasks_for_recovery(
+            FAILOVER_RECOVERY_GRACE_SECONDS
+        )
+        for item in marked:
+            log_task_recovery_marked(
+                self.logger,
+                item["task_id"],
+                item["worker_id"],
+                item["deadline_at"],
+                self.clock.tick(),
+            )
 
         # Inicia subsistemas (mesmos do orquestrador principal)
         self.scheduler = RoundRobinScheduler(
@@ -304,6 +336,12 @@ class BackupOrchestrator:
         error     = msg.get("error", "")
         worker_id = msg.get("sender", "")
         ts        = self.clock.value
+
+        can_apply, reason = self.state.can_accept_task_result(task_id, worker_id)
+        if not can_apply:
+            log_task_late_result_ignored(self.logger, task_id, worker_id, reason, ts)
+            send_msg(conn, _base(MSG_ACK, "BACKUP-PRIMARY", self.clock.send()))
+            return
 
         if status == TASK_COMPLETED:
             self.state.complete_task(task_id, result)

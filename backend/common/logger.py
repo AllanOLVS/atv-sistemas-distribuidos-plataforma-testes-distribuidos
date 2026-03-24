@@ -140,6 +140,25 @@ def log_failover(logger, from_node: str, to_node: str, lamport: int):
  
 def log_heartbeat(logger, worker_id: str, lamport: int):
     logger.debug(f"[HEARTBEAT] worker={worker_id} lamport={lamport}")
+
+def log_task_recovery_marked(logger, task_id: str, worker_id: str,
+                             deadline_at: float, lamport: int):
+    logger.warning(
+        f"[TASK_RECOVERY_MARKED] task={task_id} worker={worker_id} "
+        f"deadline_at={deadline_at:.3f} lamport={lamport}"
+    )
+
+def log_task_recovery_expired(logger, task_id: str, worker_id: str, lamport: int):
+    logger.warning(
+        f"[TASK_RECOVERY_EXPIRED] task={task_id} worker={worker_id} lamport={lamport}"
+    )
+
+def log_task_late_result_ignored(logger, task_id: str, worker_id: str,
+                                 reason: str, lamport: int):
+    logger.warning(
+        f"[TASK_LATE_RESULT_IGNORED] task={task_id} worker={worker_id} "
+        f"reason={reason} lamport={lamport}"
+    )
  
  
 # Teste rápido 

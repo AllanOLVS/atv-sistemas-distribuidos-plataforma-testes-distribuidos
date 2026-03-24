@@ -6,6 +6,12 @@ ORCHESTRATOR_PORT = 5000          # TCP: clientes → orquestrador
  
 BACKUP_HOST       = "127.0.0.1"
 BACKUP_PORT       = 5001          # TCP: backup escuta (failover)
+
+# Endpoints candidatos para clientes/workers em cenarios de failover
+ORCHESTRATOR_ENDPOINTS = [
+    (ORCHESTRATOR_HOST, ORCHESTRATOR_PORT),
+    (BACKUP_HOST, BACKUP_PORT),
+]
  
 WORKER_BASE_PORT  = 6000          # Workers usam 6000, 6001, 6002 …
  
@@ -17,6 +23,11 @@ MULTICAST_TTL     = 1             # Limita ao segmento local
 # Heartbeat 
 HEARTBEAT_INTERVAL   = 2          # segundos entre batimentos
 HEARTBEAT_TIMEOUT    = 6          # sem resposta → worker morto
+
+# Recuperacao pos-failover
+# Durante essa janela, tarefas RUNNING herdadas aguardam resultado tardio
+# antes de serem reencaminhadas para evitar duplicacao.
+FAILOVER_RECOVERY_GRACE_SECONDS = HEARTBEAT_TIMEOUT
  
 # Autenticação 
 # Usuários pré-cadastrados  {usuario: senha}

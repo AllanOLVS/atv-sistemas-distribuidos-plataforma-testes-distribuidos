@@ -17,6 +17,7 @@ import time
 from common.config   import MAX_RETRIES
 from common.lamport  import LamportClock
 from common.logger   import get_logger, log_task_distributed, log_task_reassigned, log_task_failed
+from common.logger   import log_task_recovery_expired
 from common.protocol import (
     msg_assign_task, msg_task_result,
     send_msg, recv_msg,
@@ -77,6 +78,15 @@ class RoundRobinScheduler:
         """
         while not self._stop_event.is_set():
             try:
+                expired = self.state.promote_expired_recoveries_to_pending()
+                for item in expired:
+                    log_task_recovery_expired(
+                        self.logger,
+                        item["task_id"],
+                        item.get("worker_id", ""),
+                        self.clock.tick(),
+                    )
+
                 pending = self.state.get_pending_tasks()
                 for task in pending:
                     if self._stop_event.is_set():

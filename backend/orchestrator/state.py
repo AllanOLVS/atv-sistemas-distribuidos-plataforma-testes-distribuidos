@@ -40,6 +40,9 @@ class TaskRecord:
     started_at:   float = 0.0
     finished_at:  float = 0.0
     retries:      int   = 0
+    in_recovery:  bool  = False
+    recovery_deadline_at: float = 0.0
+    recover_from_worker: str = ""
  
     def to_dict(self) -> dict:
         return asdict(self)
@@ -158,6 +161,9 @@ class GlobalState:
                 self._tasks[task_id].status    = TASK_RUNNING
                 self._tasks[task_id].worker_id = worker_id
                 self._tasks[task_id].started_at = time.time()
+                self._tasks[task_id].in_recovery = False
+                self._tasks[task_id].recovery_deadline_at = 0.0
+                self._tasks[task_id].recover_from_worker = ""
             if worker_id in self._workers:
                 if task_id not in self._workers[worker_id].active_tasks:
                     self._workers[worker_id].active_tasks.append(task_id)
@@ -169,6 +175,9 @@ class GlobalState:
                 t.status      = TASK_COMPLETED
                 t.result      = result
                 t.finished_at = time.time()
+                t.in_recovery = False
+                t.recovery_deadline_at = 0.0
+                t.recover_from_worker = ""
                 self._remove_task_from_worker(task_id, t.worker_id)
  
     def fail_task(self, task_id: str, error: str) -> None:
@@ -178,6 +187,9 @@ class GlobalState:
                 t.status      = TASK_FAILED
                 t.error       = error
                 t.finished_at = time.time()
+                t.in_recovery = False
+                t.recovery_deadline_at = 0.0
+                t.recover_from_worker = ""
                 self._remove_task_from_worker(task_id, t.worker_id)
  
     def reset_task_to_pending(self, task_id: str) -> None:
@@ -190,7 +202,81 @@ class GlobalState:
                 t.worker_id   = ""
                 t.started_at  = 0.0
                 t.retries    += 1
+                t.in_recovery = False
+                t.recovery_deadline_at = 0.0
+                t.recover_from_worker = ""
                 self._remove_task_from_worker(task_id, old_worker)
+
+    def mark_running_tasks_for_recovery(self, grace_seconds: float) -> list[dict]:
+        """
+        Marca tarefas RUNNING para uma janela de recuperação pós-failover.
+        Retorna metadados para logging.
+        """
+        with self._lock:
+            now = time.time()
+            deadline = now + grace_seconds
+            marked = []
+            for task in self._tasks.values():
+                if task.status != TASK_RUNNING or not task.worker_id:
+                    continue
+                task.in_recovery = True
+                task.recovery_deadline_at = deadline
+                task.recover_from_worker = task.worker_id
+                marked.append(
+                    {
+                        "task_id": task.task_id,
+                        "worker_id": task.worker_id,
+                        "deadline_at": deadline,
+                    }
+                )
+            return marked
+
+    def promote_expired_recoveries_to_pending(self, now: float | None = None) -> list[dict]:
+        """
+        Converte tarefas RUNNING em recuperação expiradas para PENDING.
+        Retorna lista de tarefas expiradas para logging.
+        """
+        with self._lock:
+            now = now or time.time()
+            expired = []
+            for task in self._tasks.values():
+                if task.status != TASK_RUNNING:
+                    continue
+                if not task.in_recovery:
+                    continue
+                if task.recovery_deadline_at <= 0:
+                    continue
+                if now < task.recovery_deadline_at:
+                    continue
+
+                old_worker = task.worker_id
+                task.status = TASK_PENDING
+                task.worker_id = ""
+                task.started_at = 0.0
+                task.retries += 1
+                task.in_recovery = False
+                task.recovery_deadline_at = 0.0
+                task.recover_from_worker = ""
+                self._remove_task_from_worker(task.task_id, old_worker)
+
+                expired.append({"task_id": task.task_id, "worker_id": old_worker})
+
+            return expired
+
+    def can_accept_task_result(self, task_id: str, worker_id: str) -> tuple[bool, str]:
+        """
+        Valida se um TASK_RESULT ainda é aplicável ao estado atual.
+        Evita que resultado tardio sobrescreva estado já reatribuído/concluído.
+        """
+        with self._lock:
+            task = self._tasks.get(task_id)
+            if task is None:
+                return False, "task_not_found"
+            if task.status != TASK_RUNNING:
+                return False, f"task_not_running:{task.status}"
+            if task.worker_id != worker_id:
+                return False, f"worker_mismatch:expected={task.worker_id}"
+            return True, "ok"
  
     def get_task(self, task_id: str) -> Optional[TaskRecord]:
         with self._lock:
